@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberDrill — Кібербезпека як гра</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 CyberDrill</h1>
+      <p id="github-user"></p>
+      <div class="score">Рахунок: <span id="score">0</span></div>
+    </header>
+
+    <div id="login-screen" class="screen active">
+      <h2>Увійдіть через GitHub</h2>
+      <button id="github-login">Увійти</button>
+    </div>
+
+    <div id="menu-screen" class="screen">
+      <h2>Виберіть місію</h2>
+      <div class="missions">
+        <button data-mission="1">1. Знайди фішинг</button>
+        <button data-mission="2">2. Селфі з прильотом</button>
+        <button data-mission="3">3. Рація без Zeroize</button>
+        <button data-mission="4">4. Пароль на стікері</button>
+      </div>
+      <button id="leaderboard-btn">Лідери</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+      <div id="mission-title"></div>
+      <canvas id="game-canvas"></canvas>
+      <div id="hint"></div>
+      <button id="submit-answer">Перевірити</button>
+      <button id="back-to-menu">Назад</button>
+    </div>
+
+    <div id="leaderboard-screen" class="screen">
+      <h2>🏆 Топ-10 гравців</h2>
+      <ol id="leaders"></ol>
+      <button id="back-from-leaderboard">Назад</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
