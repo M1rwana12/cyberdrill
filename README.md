@@ -8,11 +8,15 @@
 3. Рація без Zeroize
 4. Пароль на стікері
 
-## Технології
-- HTML + Canvas
-- GitHub OAuth
+## Функції
+- GitHub-авторизація
 - Cloudflare Workers (OAuth Proxy)
-- GitHub Pages
+- Лідерборд
+- Бейджи: `Zeroize Master`, `OPSEC Pro`
 
-## Автор
-[@M1rwana12](https://github.com/M1rwana12) — спеціаліст з кібербезпеки
+## Технології
+HTML, CSS, JavaScript, Canvas, GitHub OAuth, GitHub Pages
+
+---
+
+*Захищайся. Тренуйся. Перемагай.*

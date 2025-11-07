@@ -10,16 +10,19 @@
 <body>
   <div class="container">
     <header>
-      <h1>🔐 CyberDrill</h1>
+      <h1>CyberDrill</h1>
       <p id="github-user"></p>
       <div class="score">Рахунок: <span id="score">0</span></div>
+      <div id="badges"></div>
     </header>
 
+    <!-- Екран входу -->
     <div id="login-screen" class="screen active">
       <h2>Увійдіть через GitHub</h2>
       <button id="github-login">Увійти</button>
     </div>
 
+    <!-- Головне меню -->
     <div id="menu-screen" class="screen">
       <h2>Виберіть місію</h2>
       <div class="missions">
@@ -31,16 +34,18 @@
       <button id="leaderboard-btn">Лідери</button>
     </div>
 
+    <!-- Екран гри -->
     <div id="game-screen" class="screen">
       <div id="mission-title"></div>
       <canvas id="game-canvas"></canvas>
       <div id="hint"></div>
-      <button id="submit-answer">Перевірити</button>
+      <div id="answers"></div>
       <button id="back-to-menu">Назад</button>
     </div>
 
+    <!-- Лідерборд -->
     <div id="leaderboard-screen" class="screen">
-      <h2>🏆 Топ-10 гравців</h2>
+      <h2>Топ-10 гравців</h2>
       <ol id="leaders"></ol>
       <button id="back-from-leaderboard">Назад</button>
     </div>

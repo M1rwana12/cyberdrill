@@ -1,101 +1,59 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  background: #0a0a0a; 
+  color: #0f0; 
+  font-family: 'Roboto Mono', monospace; 
+  text-align: center; 
+  overflow: hidden; 
 }
-
-body {
-  background: #0a0a0a;
-  color: #0f0;
-  font-family: 'Roboto Mono', monospace;
-  text-align: center;
-  overflow: hidden;
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+header { margin-bottom: 30px; }
+h1 { 
+  font-family: 'Orbitron', sans-serif; 
+  font-size: 3rem; 
+  text-shadow: 0 0 10px #0f0; 
+  margin-bottom: 10px; 
 }
-
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-header {
-  margin-bottom: 30px;
-}
-
-h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 3rem;
-  text-shadow: 0 0 10px #0f0;
-  margin-bottom: 10px;
-}
-
-#github-user {
-  color: #0b0;
-  font-size: 1.1rem;
-}
-
-.score {
-  font-size: 1.3rem;
-  margin-top: 10px;
-}
-
-.screen {
-  display: none;
-  animation: fadeIn 0.5s;
-}
-
-.screen.active {
-  display: block;
-}
-
+#github-user { color: #0b0; font-size: 1.1rem; }
+.score { font-size: 1.3rem; margin-top: 10px; }
+#badges { margin-top: 10px; color: #0f0; font-weight: bold; }
+.screen { display: none; animation: fadeIn 0.5s; }
+.screen.active { display: block; }
 button {
-  background: #001a00;
-  color: #0f0;
-  border: 2px solid #0f0;
-  padding: 12px 24px;
+  background: #001a00; 
+  color: #0f0; 
+  border: 2px solid #0f0; 
+  padding: 12px 24px; 
   margin: 10px;
-  font-family: 'Roboto Mono';
-  font-size: 1rem;
-  cursor: pointer;
+  font-family: 'Roboto Mono'; 
+  font-size: 1rem; 
+  cursor: pointer; 
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
-
-button:hover {
-  background: #0f0;
-  color: #000;
-  box-shadow: 0 0 20px #0f0;
+button:hover { 
+  background: #0f0; 
+  color: #000; 
+  box-shadow: 0 0 20px #0f0; 
 }
-
-.missions button {
-  display: block;
-  width: 100%;
-  margin: 15px auto;
-  font-size: 1.2rem;
+.missions button { 
+  display: block; 
+  width: 100%; 
+  margin: 15px auto; 
+  font-size: 1.2rem; 
 }
-
-#game-canvas {
-  border: 2px solid #0f0;
-  margin: 20px auto;
-  display: block;
-  max-width: 100%;
-  image-rendering: pixelated;
-  box-shadow: 0 0 15px #0f0;
+#game-canvas { 
+  border: 2px solid #0f0; 
+  margin: 20px auto; 
+  display: block; 
+  max-width: 100%; 
+  box-shadow: 0 0 15px #0f0; 
 }
-
-#hint {
-  margin: 20px;
-  font-style: italic;
-  color: #0b0;
+#hint { margin: 20px; font-style: italic; color: #0b0; }
+#answers button { 
+  display: block; 
+  width: 80%; 
+  margin: 10px auto; 
 }
-
-#leaders {
-  text-align: left;
-  margin: 20px auto;
-  max-width: 500px;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+#leaders { text-align: left; margin: 20px auto; max-width: 500px; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

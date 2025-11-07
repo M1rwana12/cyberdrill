@@ -1,5 +1,5 @@
 // === КОНФІГУРАЦІЯ ===
-const CLIENT_ID = "Iv23liOFQSm9NgLpBcY0"; // ТВІЙ ID
+const CLIENT_ID = "Iv23liOFQSm9NgLpBcY0";
 const REDIRECT_URI = encodeURIComponent(window.location.origin + window.location.pathname);
 const OAUTH_PROXY = "https://cyberdrill-oauth.senja32082.workers.dev";
 
@@ -73,11 +73,6 @@ if (code) {
       alert("Помилка авторизації. Спробуй ще раз.");
       showScreen('login-screen');
     });
-} else if (localStorage.getItem('cyberdrill_demo')) {
-  // Демо-режим (опціонально)
-  user = { login: "demo", avatar_url: "" };
-  document.getElementById('github-user').textContent = `@demo`;
-  showScreen('menu-screen');
 }
 
 document.getElementById('github-login').onclick = () => {
@@ -112,6 +107,7 @@ function startMission(id) {
   const img = new Image();
   img.src = m.image;
   img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  img.onerror = () => ctx.fillText("Зображення не знайдено", 50, 50);
 
   const answersDiv = document.getElementById('answers');
   answersDiv.innerHTML = '';
@@ -155,13 +151,15 @@ document.getElementById('back-to-menu').onclick = () => showScreen('menu-screen'
 
 // === ЛІДЕРБОРД ===
 function saveScore() {
+  if (!user) return;
   const key = `cyberdrill_score_${user.login}`;
   localStorage.setItem(key, score);
   updateLeaderboard();
 }
 
 function loadScore() {
-  const key = `cyberdrill_score_${user?.login}`;
+  if (!user) return;
+  const key = `cyberdrill_score_${user.login}`;
   score = parseInt(localStorage.getItem(key) || '0');
   document.getElementById('score').textContent = score;
 }
