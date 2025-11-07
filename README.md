@@ -1,23 +1,20 @@
 ```markdown
 <p align="center">
-  <img src="assets/icon-512.png" alt="CyberDrill Logo" width="120"/>
+  <strong style="font-size: 2.8rem; color: #0f0; text-shadow: 0 0 15px #0f0; font-family: 'Orbitron', monospace;">
+    CyberDrill 2.0
+  </strong>
 </p>
 
-<h1 align="center">
-  <span style="color: #0f0; text-shadow: 0 0 10px #0f0;">CyberDrill 2.0</span>
-</h1>
-
 <p align="center">
-  <strong>Кібертренування для ЗСУ</strong><br>
-  OPSEC • Фішинг • Zeroize • Ransomware
+  <em style="color: #0b0;">Кібертренування для ЗСУ • OPSEC • Zeroize • Ransomware</em>
 </p>
 
 <p align="center">
   <a href="https://m1rwana12.github.io/cyberdrill">
-    <img src="https://img.shields.io/badge/PLAY%20NOW-0f0?style=for-the-badge&logo=googlechrome" alt="Play Now"/>
+    <img src="https://img.shields.io/badge/PLAY%20NOW-0f0?style=for-the-badge&logo=googlechrome" alt="Play"/>
   </a>
   <a href="https://m1rwana12.github.io/cyberdrill">
-    <img src="https://img.shields.io/badge/PWA-Install%20App-0f0?style=for-the-badge&logo=pwa" alt="PWA"/>
+    <img src="https://img.shields.io/badge/PWA-Install-0f0?style=for-the-badge&logo=pwa" alt="PWA"/>
   </a>
   <a href="https://github.com/M1rwana12/cyberdrill/stargazers">
     <img src="https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0" alt="Stars"/>
@@ -26,56 +23,44 @@
 
 ---
 
-## Опис
+## Що це?
 
-**CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки** для **тренування бійців ЗСУ**.
+**CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений спеціально для **тренування бійців ЗСУ**.
 
-> **Не гра. Зброя.**
+> **Це не гра. Це зброя.**
 
 ---
 
-## Фічі
+## Функції
 
-- **6 місій** — від фішингу до боса  
-- **Клік по зображенню** — знайди вразливість  
-- **Ransomware Бос** — 10 кліків за 20с  
-- **Щоденний челендж** — +200 балів  
-- **Лідерборд** — глобальний топ  
-- **Бейджи** — `Zeroize Master`, `OPSEC Pro`  
-- **PWA** — додаток на телефоні  
-- **GitHub Gist** — збереження прогресу  
-- **Звуки .wav** — beep, explosion, success  
+| Функція | Опис |
+|--------|------|
+| **6 місій** | Від фішингу до ransomware |
+| **Клік по зображенню** | Знайди вразливість на Canvas |
+| **Ransomware Бос** | 10 кліків за 20 секунд |
+| **Щоденний челендж** | +200 балів щодня |
+| **Глобальний лідерборд** | Топ-10 кібервоїнів |
+| **Бейджи** | `Zeroize Master` • `OPSEC Pro` |
+| **PWA** | Додаток на телефоні |
+| **Gist-збереження** | Прогрес назавжди |
+| **Звуки .wav** | beep • explosion • success |
 
 ---
 
 ## Місії
 
-| # | Місія | Навичка |
-|---|------|--------|
-| 1 | Фішинг-лист | Розпізнавання фішингу |
-| 2 | Селфі з прильотом | OPSEC, EXIF |
-| 3 | Zeroize рації | Знищення ключів |
-| 4 | Пароль на стікері | Фізична безпека |
-| 5 | AI Голос-фішинг | Vishing |
-| 6 | Ransomware Бос | Протидія вірусам |
+```
+1. Фішинг-лист          → Розпізнавання фішингу
+2. Селфі з прильотом    → OPSEC, EXIF
+3. Zeroize рації        → Знищення ключів
+4. Пароль на стікері    → Фізична безпека
+5. AI Голос-фішинг      → Vishing
+6. Ransomware Бос       → Протидія вірусам
+```
 
 ---
 
-## Скріншоти
-
-<p align="center">
-  <img src="screenshots/menu.jpg" width="45%" alt="Головне меню"/>
-  <img src="screenshots/mission5.jpg" width="45%" alt="Місія 5"/>
-</p>
-<p align="center">
-  <img src="screenshots/boss.jpg" width="45%" alt="Бос-файт"/>
-</p>
-
-> *Зроби скріншоти та поклади в папку `screenshots/`*
-
----
-
-## Як грати
+## Як грати?
 
 1. [Відкрий гру](https://m1rwana12.github.io/cyberdrill)  
 2. Увійди через **GitHub**  
@@ -87,16 +72,18 @@
 
 ## PWA — Додаток на телефоні
 
-1. Відкрий у Chrome/Safari  
-2. Натисни **"Додати на головний екран"**  
+```
+1. Відкрий у Chrome / Safari
+2. Натисни "Додати на головний екран"
 3. Грай без інтернету!
+```
 
 ---
 
 ## Технології
 
-```text
-HTML5 • Canvas • GitHub OAuth • Gist API • PWA • GitHub Pages
+```
+HTML5 Canvas • GitHub OAuth • Gist API • PWA • GitHub Pages • WAV
 ```
 
 ---
@@ -121,14 +108,10 @@ cd cyberdrill
 ## Розробник
 
 <p align="center">
-  <a href="https://github.com/M1rwana12">
-    <img src="https://github.com/M1rwana12.png" width="80" style="border-radius: 50%; border: 3px solid #0f0;"/>
-  </a>
-</p>
-
-<p align="center">
-  <strong>@M1rwana12</strong><br>
-  Кібер-розробник. Захищаю Україну кодом.
+  <strong style="color: #0f0; text-shadow: 0 0 10px #0f0;">
+    @M1rwana12
+  </strong><br>
+  <em>Кібер-розробник. Захищаю Україну кодом.</em>
 </p>
 
 ---
@@ -143,12 +126,14 @@ cd cyberdrill
 
 ## Ліцензія
 
-**MIT** — використовуй, змінюй, поширюй.
+```
+MIT License — використовуй, змінюй, поширюй.
+```
 
 ---
 
 <p align="center">
-  <strong style="color: #0f0; text-shadow: 0 0 10px #0f0;">
+  <strong style="color: #0f0; text-shadow: 0 0 20px #0f0; font-size: 1.5rem;">
     CyberDrill — це не гра. Це зброя.
   </strong>
 </p>
@@ -158,6 +143,6 @@ cd cyberdrill
 </p>
 
 <p align="center">
-  #кібербезпека #ЗСУ #OPSEC #CyberDrill
+  #кібербезпека #ЗСУ #OPSEC #Zeroize #CyberDrill
 </p>
 ```
