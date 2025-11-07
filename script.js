@@ -7,15 +7,57 @@ let GIST_ID = null;
 let user = null, accessToken = null, score = 0, streak = 0;
 let currentMission = 0, timerInterval = null;
 
-// === МІСІЇ ===
+// === МІСІЇ (5-6 ВИПРАВЛЕНО) ===
 const missions = [
   null,
-  { title: "1. Фішинг-лист", image: "assets/phishing-email.jpg", question: "Знайди фішинг", correct: 1, answers: ["@gmail.com", "Терміновість", "Логотип", "Граматика"], hint: "Фішинг тисне на емоції", hotzone: {x:200,y:150,w:200,h:100} },
-  { title: "2. Селфі з прильотом", image: "assets/selfie-boom.jpg", question: "Чому небезпечно?", correct: 0, answers: ["EXIF геолокація", "Фон", "Фільтри", "Світло"], hint: "Фото знає, де ти", hotzone: {x:300,y:100,w:150,h:200} },
-  { title: "3. Zeroize рації", image: "assets/radio-no-zeroize.jpg", question: "Що зробити?", correct: 1, answers: ["Вимкнути", "Zeroize", "Змінити частоту", "Сфоткати"], hint: "Zeroize = знищити ключі", hotzone: {x:250,y:200,w:100,h:80} },
-  { title: "4. Пароль на стікері", image: "assets/password-sticker.jpg", question: "Що не так?", correct: 1, answers: ["Стікери", "Пароль видно", "Монітор", "Кабель"], hint: "Пароль = таємниця", hotzone: {x:350,y:180,w:120,h:60} },
-  { title: "5. AI Голос-фішинг", image: "assets/ai-voice.jpg", question: "Що робити?", correct: 2, answers: ["Відкрити", "Перевірити", "Вимкнути", "Записати"], hint: "2-е джерело!", hotzone: null },
-  { title: "6. Ransomware Бос", image: "assets/ransomware.jpg", question: "Очисти систему!", correct: null, answers: [], hint: "Клікни 10 разів за 20с!", boss: true }
+  { 
+    title: "1. Фішинг-лист", 
+    image: "assets/phishing-email.jpg", 
+    correct: 1, 
+    answers: ["@gmail.com", "Терміновість", "Логотип", "Граматика"], 
+    hint: "Фішинг тисне на емоції", 
+    hotzone: {x: 200, y: 150, w: 200, h: 100} 
+  },
+  { 
+    title: "2. Селфі з прильотом", 
+    image: "assets/selfie-boom.jpg", 
+    correct: 0, 
+    answers: ["EXIF геолокація", "Фон", "Фільтри", "Світло"], 
+    hint: "Фото знає, де ти", 
+    hotzone: {x: 300, y: 100, w: 150, h: 200} 
+  },
+  { 
+    title: "3. Zeroize рації", 
+    image: "assets/radio-no-zeroize.jpg", 
+    correct: 1, 
+    answers: ["Вимкнути", "Zeroize", "Змінити частоту", "Сфоткати"], 
+    hint: "Zeroize = знищити ключі", 
+    hotzone: {x: 250, y: 200, w: 100, h: 80} 
+  },
+  { 
+    title: "4. Пароль на стікері", 
+    image: "assets/password-sticker.jpg", 
+    correct: 1, 
+    answers: ["Стікери", "Пароль видно", "Монітор", "Кабель"], 
+    hint: "Пароль = таємниця", 
+    hotzone: {x: 350, y: 180, w: 120, h: 60} 
+  },
+  { 
+    title: "5. AI Голос-фішинг", 
+    image: "assets/ai-voice.jpg", 
+    correct: 2, 
+    answers: ["Відкрити", "Перевірити", "Вимкнути", "Записати"], 
+    hint: "Завжди перевіряй 2-е джерело!", 
+    hotzone: {x: 200, y: 100, w: 200, h: 200} 
+  },
+  { 
+    title: "6. Ransomware Бос", 
+    image: "assets/ransomware.jpg", 
+    correct: null, 
+    answers: [], 
+    hint: "Клікни 10 разів за 20с!", 
+    boss: true 
+  }
 ];
 
 // === OAuth ===
@@ -72,9 +114,11 @@ function startMission(id) {
   const img = new Image();
   img.src = m.image;
   img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  img.onerror = () => ctx.fillText("Зображення не знайдено", 50, 50);
 
-  // Таймер
-  let timeLeft = m.boss ? 20 : 30;
+  // ТАЙМЕР: 15с для челенджу, 30с звичайно, 20с для боса
+  const isDaily = (id == 1 && localStorage.getItem('cyberdrill_daily') === new Date().toDateString());
+  let timeLeft = isDaily ? 15 : (m.boss ? 20 : 30);
   const timerEl = document.getElementById('timer');
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -85,23 +129,16 @@ function startMission(id) {
   // Відповіді
   const answersDiv = document.getElementById('answers');
   answersDiv.innerHTML = '';
-  if (!m.boss) {
+  if (!m.boss && m.answers) {
     m.answers.forEach((a, i) => {
       const btn = document.createElement('button');
       btn.textContent = a;
       btn.onclick = () => checkAnswer(i);
       answersDiv.appendChild(btn);
     });
-  } else {
-    let clicks = 0;
-    canvas.onclick = () => {
-      clicks++;
-      playSound('beep');
-      if (clicks >= 10) endMission(true, 300);
-    };
   }
 
-  // Клік по зоні
+  // Клік по зоні (всі місії з hotzone)
   if (m.hotzone && !m.boss) {
     canvas.onclick = (e) => {
       const rect = canvas.getBoundingClientRect();
@@ -109,7 +146,19 @@ function startMission(id) {
       const y = e.clientY - rect.top;
       const h = m.hotzone;
       if (x > h.x && x < h.x + h.w && y > h.y && y < h.y + h.h) {
-        endMission(true, 150);
+        endMission(true, isDaily ? 350 : 150); // +200 за челендж
+      }
+    };
+  }
+
+  // Бос-файт (Ransomware)
+  if (m.boss) {
+    let clicks = 0;
+    canvas.onclick = () => {
+      clicks++;
+      playSound('beep');
+      if (clicks >= 10) {
+        endMission(true, isDaily ? 500 : 300);
       }
     };
   }
@@ -119,14 +168,19 @@ function startMission(id) {
 
 function checkAnswer(selected) {
   const m = missions[currentMission];
-  if (selected === m.correct) endMission(true, 100);
-  else { alert("Ні!"); playSound('explosion'); }
+  const isDaily = (currentMission == 1 && localStorage.getItem('cyberdrill_daily') === new Date().toDateString());
+  if (selected === m.correct) {
+    endMission(true, isDaily ? 300 : 100);
+  } else {
+    alert("Ні! Спробуй ще.");
+    playSound('explosion');
+  }
 }
 
 function endMission(success, bonus = 0) {
   clearInterval(timerInterval);
   if (success) {
-    score += bonus || 100;
+    score += bonus;
     document.getElementById('score').textContent = score;
     playSound('success');
     saveProgress();
@@ -136,7 +190,10 @@ function endMission(success, bonus = 0) {
   showScreen('menu-screen');
 }
 
-document.getElementById('back-to-menu').onclick = () => { clearInterval(timerInterval); showScreen('menu-screen'); };
+document.getElementById('back-to-menu').onclick = () => { 
+  clearInterval(timerInterval); 
+  showScreen('menu-screen'); 
+};
 
 // === ЗБЕРЕЖЕННЯ ===
 async function saveProgress() {
@@ -150,9 +207,14 @@ async function saveToGist(data) {
   const url = GIST_ID ? `https://api.github.com/gists/${GIST_ID}` : 'https://api.github.com/gists';
   const method = GIST_ID ? 'PATCH' : 'POST';
   const res = await fetch(url, {
-    method, headers: { Authorization: `token ${accessToken}`, 'Content-Type': 'application/json' },
+    method, 
+    headers: { 
+      Authorization: `token ${accessToken}`, 
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify({
-      description: 'CyberDrill Progress', public: false,
+      description: 'CyberDrill Progress', 
+      public: false,
       files: { 'progress.json': { content: JSON.stringify(data) } }
     })
   });
@@ -205,7 +267,8 @@ function updateBadges() {
   const badges = getBadges();
   const names = { zeroize: "Zeroize Master", opsec: "OPSEC Pro" };
   const div = document.getElementById('badges');
-  div.innerHTML = '<strong>Бейджи:</strong> ' + (badges.map(b => names[b]).join(' | ') || 'Немає');
+  div.innerHTML = '<strong>Бейджи:</strong> ' + 
+    (badges.map(b => names[b]).filter(Boolean).join(' | ') || 'Немає');
 }
 
 // === ЛІДЕРБОРД ===
@@ -230,7 +293,10 @@ async function loadGlobalLeaderboard() {
   });
 }
 
-document.getElementById('leaderboard-btn').onclick = () => { loadGlobalLeaderboard(); showScreen('leaderboard-screen'); };
+document.getElementById('leaderboard-btn').onclick = () => { 
+  loadGlobalLeaderboard(); 
+  showScreen('leaderboard-screen'); 
+};
 document.getElementById('back-from-leaderboard').onclick = () => showScreen('menu-screen');
 
 // === ЗВУКИ (WAV) ===
@@ -240,9 +306,16 @@ function playSound(id) {
   audio.play().catch(() => {});
 }
 
-// === ЩОДЕННИЙ ЧЕЛЕНДЖ ===
+// === ЩОДЕННИЙ ЧЕЛЕНДЖ (ВИПРАВЛЕНО) ===
 document.getElementById('daily-btn').onclick = () => {
-  alert("Щоденний челендж: знайди фішинг за 15с! +200");
+  const today = new Date().toDateString();
+  const lastDaily = localStorage.getItem('cyberdrill_daily');
+  if (lastDaily === today) {
+    alert("Челендж вже виконано сьогодні! Повертайся завтра.");
+    return;
+  }
+  alert("ЩОДЕННИЙ ЧЕЛЕНДЖ: Знайди фішинг за 15с! +200 бонусів");
   currentMission = 1;
+  localStorage.setItem('cyberdrill_daily', today);
   startMission(1);
 };
