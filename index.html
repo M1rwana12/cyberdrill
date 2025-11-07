@@ -3,53 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CyberDrill — Кібербезпека як гра</title>
+  <title>CyberDrill 2.0</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f0">
+  <link rel="icon" href="assets/icon-512.png" sizes="512x512">
+  <link rel="apple-touch-icon" href="assets/icon-512.png">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>CyberDrill</h1>
-      <p id="github-user"></p>
-      <div class="score">Рахунок: <span id="score">0</span></div>
-      <div id="badges"></div>
+      <div class="logo">CyberDrill 2.0</div>
+      <div class="user-info">
+        <p id="github-user"></p>
+        <div class="stats">
+          <div class="score">Рахунок: <span id="score">0</span></div>
+          <div class="streak">Streak: <span id="streak-count">0</span> днів</div>
+        </div>
+        <div id="badges" class="badges"></div>
+      </div>
     </header>
 
     <!-- Екран входу -->
     <div id="login-screen" class="screen active">
-      <h2>Увійдіть через GitHub</h2>
-      <button id="github-login">Увійти</button>
+      <div class="card">
+        <h2>Увійдіть через GitHub</h2>
+        <button id="github-login" class="btn-primary">Увійти</button>
+      </div>
     </div>
 
     <!-- Головне меню -->
     <div id="menu-screen" class="screen">
-      <h2>Виберіть місію</h2>
-      <div class="missions">
-        <button data-mission="1">1. Знайди фішинг</button>
-        <button data-mission="2">2. Селфі з прильотом</button>
-        <button data-mission="3">3. Рація без Zeroize</button>
-        <button data-mission="4">4. Пароль на стікері</button>
+      <div class="card">
+        <h2>Виберіть місію</h2>
+        <div class="missions">
+          <button data-mission="1" class="mission-btn">1. Фішинг-лист</button>
+          <button data-mission="2" class="mission-btn">2. Селфі з прильотом</button>
+          <button data-mission="3" class="mission-btn">3. Zeroize рації</button>
+          <button data-mission="4" class="mission-btn">4. Пароль на стікері</button>
+          <button data-mission="5" class="mission-btn">5. AI Голос-фішинг</button>
+          <button data-mission="6" class="mission-btn boss">6. Ransomware Бос</button>
+        </div>
+        <div class="menu-actions">
+          <button id="leaderboard-btn" class="btn-secondary">Лідери</button>
+          <button id="daily-btn" class="btn-daily">Щоденний челендж</button>
+        </div>
       </div>
-      <button id="leaderboard-btn">Лідери</button>
     </div>
 
     <!-- Екран гри -->
     <div id="game-screen" class="screen">
-      <div id="mission-title"></div>
-      <canvas id="game-canvas"></canvas>
-      <div id="hint"></div>
-      <div id="answers"></div>
-      <button id="back-to-menu">Назад</button>
+      <div class="card">
+        <div id="mission-title" class="mission-title"></div>
+        <div id="timer" class="timer"></div>
+        <canvas id="game-canvas"></canvas>
+        <div id="hint" class="hint"></div>
+        <div id="answers" class="answers"></div>
+        <button id="back-to-menu" class="btn-back">Назад</button>
+      </div>
     </div>
 
     <!-- Лідерборд -->
     <div id="leaderboard-screen" class="screen">
-      <h2>Топ-10 гравців</h2>
-      <ol id="leaders"></ol>
-      <button id="back-from-leaderboard">Назад</button>
+      <div class="card">
+        <h2>Глобальний Топ-10</h2>
+        <ol id="leaders" class="leaderboard"></ol>
+        <button id="back-from-leaderboard" class="btn-back">Назад</button>
+      </div>
     </div>
   </div>
+
+  <!-- Звуки (WAV) -->
+  <audio id="beep" src="assets/beep.wav" preload="auto"></audio>
+  <audio id="explosion" src="assets/explosion.wav" preload="auto"></audio>
+  <audio id="success" src="assets/success.wav" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>

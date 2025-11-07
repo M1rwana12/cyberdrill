@@ -2,46 +2,20 @@
 const CLIENT_ID = "Iv23liOFQSm9NgLpBcY0";
 const REDIRECT_URI = encodeURIComponent(window.location.origin + window.location.pathname);
 const OAUTH_PROXY = "https://cyberdrill-oauth.senja32082.workers.dev";
+let GIST_ID = null;
 
-let user = null;
-let accessToken = null;
-let score = 0;
+let user = null, accessToken = null, score = 0, streak = 0;
+let currentMission = 0, timerInterval = null;
 
 // === МІСІЇ ===
 const missions = [
   null,
-  {
-    title: "1. Знайди фішинг",
-    image: "assets/phishing-email.jpg",
-    question: "Яка ознака фішингу?",
-    correct: 1,
-    answers: ["Домен @gmail.com", "Терміновість", "Правильна граматика", "Офіційний логотип"],
-    hint: "Фішинг завжди тисне на емоції"
-  },
-  {
-    title: "2. Селфі з прильотом — що не так?",
-    image: "assets/selfie-boom.jpg",
-    question: "Чому це небезпечно?",
-    correct: 0,
-    answers: ["Геолокація в EXIF", "Красивий фон", "Селфі — це круто", "Немає фільтрів"],
-    hint: "Фото знає, де ти був"
-  },
-  {
-    title: "3. Рація без Zeroize — виправ",
-    image: "assets/radio-no-zeroize.jpg",
-    question: "Що треба зробити?",
-    correct: 1,
-    answers: ["Вимкнути", "Натиснути Zeroize", "Змінити частоту", "Сфоткати"],
-    hint: "Zeroize = знищити ключі"
-  },
-  {
-    title: "4. Пароль на стікері",
-    image: "assets/password-sticker.jpg",
-    question: "Що не так?",
-    correct: 1,
-    answers: ["Стікери — це мило", "Пароль видно", "Монітор чистий", "Все ок"],
-    hint: "Пароль = таємниця"
-  }
+  { title: "1. Фішинг-лист", image: "assets/phishing-email.jpg", question: "Знайди фішинг", correct: 1, answers: ["@gmail.com", "Терміновість", "Логотип", "Граматика"], hint: "Фішинг тисне на емоції", hotzone: {x:200,y:150,w:200,h:100} },
+  { title: "2. Селфі з прильотом", image: "assets/selfie-boom.jpg", question: "Чому небезпечно?", correct: 0, answers: ["EXIF геолокація", "Фон", "Фільтри", "Світло"], hint: "Фото знає, де ти", hotzone: {x:300,y:100,w:150,h:200} },
+  { title: "3. Zeroize рації", image: "assets/radio-no-zeroize.jpg", question: "Що зробити?", correct: 1, answers: ["Вимкнути", "Zeroize", "Змінити частоту", "Сфоткати"], hint: "Zeroize = знищити ключі", hotzone: {x:250,y:200,w:100,h:80} },
+  { title: "4. Пароль на стікері", image: "assets/password-sticker.jpg", question: "Що не так?", correct: 1, answers: ["Стікери", "Пароль видно", "Монітор", "Кабель"], hint: "Пароль = таємниця", hotzone: {x:350,y:180,w:120,h:60} },
+  { title: "5. AI Голос-фішинг", image: "assets/ai-voice.jpg", question: "Що робити?", correct: 2, answers: ["Відкрити", "Перевірити", "Вимкнути", "Записати"], hint: "2-е джерело!", hotzone: null },
+  { title: "6. Ransomware Бос", image: "assets/ransomware.jpg", question: "Очисти систему!", correct: null, answers: [], hint: "Клікни 10 разів за 20с!", boss: true }
 ];
 
 // === OAuth ===
@@ -54,9 +28,7 @@ if (code) {
     .then(data => {
       if (data.access_token) {
         accessToken = data.access_token;
-        return fetch('https://api.github.com/user', {
-          headers: { Authorization: `token ${accessToken}` }
-        });
+        return fetch('https://api.github.com/user', { headers: { Authorization: `token ${accessToken}` } });
       }
       throw new Error("No token");
     })
@@ -64,20 +36,15 @@ if (code) {
     .then(u => {
       user = u;
       document.getElementById('github-user').textContent = `@${u.login}`;
-      loadScore();
+      loadProgress();
       showScreen('menu-screen');
-      updateBadges();
       history.replaceState({}, '', window.location.pathname);
     })
-    .catch(() => {
-      alert("Помилка авторизації. Спробуй ще раз.");
-      showScreen('login-screen');
-    });
+    .catch(() => { alert("Помилка входу"); showScreen('login-screen'); });
 }
 
 document.getElementById('github-login').onclick = () => {
-  const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=read:user`;
-  window.location.href = authUrl;
+  window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=read:user gist`;
 };
 
 // === ЕКРАНИ ===
@@ -88,18 +55,16 @@ function showScreen(id) {
 }
 
 // === ГРА ===
-let currentMission = 0;
-
 document.querySelectorAll('[data-mission]').forEach(btn => {
-  btn.onclick = () => {
-    currentMission = btn.dataset.mission;
-    startMission(currentMission);
-  };
+  btn.onclick = () => { currentMission = btn.dataset.mission; startMission(currentMission); };
 });
 
 function startMission(id) {
   const m = missions[id];
   document.getElementById('mission-title').textContent = m.title;
+  document.getElementById('hint').textContent = m.hint;
+  document.getElementById('timer').textContent = '';
+
   const canvas = document.getElementById('game-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = 600; canvas.height = 400;
@@ -107,99 +72,177 @@ function startMission(id) {
   const img = new Image();
   img.src = m.image;
   img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  img.onerror = () => ctx.fillText("Зображення не знайдено", 50, 50);
 
+  // Таймер
+  let timeLeft = m.boss ? 20 : 30;
+  const timerEl = document.getElementById('timer');
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerEl.textContent = `⏰ ${timeLeft}с`;
+    if (timeLeft <= 0) endMission(false);
+  }, 1000);
+
+  // Відповіді
   const answersDiv = document.getElementById('answers');
   answersDiv.innerHTML = '';
-  m.answers.forEach((a, i) => {
-    const btn = document.createElement('button');
-    btn.textContent = a;
-    btn.onclick = () => checkAnswer(i);
-    answersDiv.appendChild(btn);
-  });
+  if (!m.boss) {
+    m.answers.forEach((a, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = a;
+      btn.onclick = () => checkAnswer(i);
+      answersDiv.appendChild(btn);
+    });
+  } else {
+    let clicks = 0;
+    canvas.onclick = () => {
+      clicks++;
+      playSound('beep');
+      if (clicks >= 10) endMission(true, 300);
+    };
+  }
 
-  document.getElementById('hint').textContent = m.hint;
+  // Клік по зоні
+  if (m.hotzone && !m.boss) {
+    canvas.onclick = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const h = m.hotzone;
+      if (x > h.x && x < h.x + h.w && y > h.y && y < h.y + h.h) {
+        endMission(true, 150);
+      }
+    };
+  }
+
   showScreen('game-screen');
 }
 
 function checkAnswer(selected) {
   const m = missions[currentMission];
-  if (selected === m.correct) {
-    alert("Правильно! +100");
-    score += 100;
-    document.getElementById('score').textContent = score;
-    saveScore();
+  if (selected === m.correct) endMission(true, 100);
+  else { alert("Ні!"); playSound('explosion'); }
+}
 
-    // БЕЙДЖІ
-    const badges = JSON.parse(localStorage.getItem('cyberdrill_badges') || '[]');
-    if (currentMission == 3 && !badges.includes('zeroize')) {
-      badges.push('zeroize');
-      alert("Бейдж: Zeroize Master!");
-    }
-    if (score >= 300 && !badges.includes('opsec')) {
-      badges.push('opsec');
-      alert("Бейдж: OPSEC Pro!");
-    }
-    localStorage.setItem('cyberdrill_badges', JSON.stringify(badges));
+function endMission(success, bonus = 0) {
+  clearInterval(timerInterval);
+  if (success) {
+    score += bonus || 100;
+    document.getElementById('score').textContent = score;
+    playSound('success');
+    saveProgress();
+    if (currentMission == 3) unlockBadge('zeroize');
+    if (score >= 500) unlockBadge('opsec');
+  }
+  showScreen('menu-screen');
+}
+
+document.getElementById('back-to-menu').onclick = () => { clearInterval(timerInterval); showScreen('menu-screen'); };
+
+// === ЗБЕРЕЖЕННЯ ===
+async function saveProgress() {
+  const data = { score, streak: getStreak(), badges: getBadges(), user: user.login };
+  localStorage.setItem(`cyberdrill_${user.login}`, JSON.stringify(data));
+  await saveToGist(data);
+  updateLeaderboard();
+}
+
+async function saveToGist(data) {
+  const url = GIST_ID ? `https://api.github.com/gists/${GIST_ID}` : 'https://api.github.com/gists';
+  const method = GIST_ID ? 'PATCH' : 'POST';
+  const res = await fetch(url, {
+    method, headers: { Authorization: `token ${accessToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      description: 'CyberDrill Progress', public: false,
+      files: { 'progress.json': { content: JSON.stringify(data) } }
+    })
+  });
+  const json = await res.json();
+  if (!GIST_ID) GIST_ID = json.id;
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem(`cyberdrill_${user.login}`);
+  if (saved) {
+    const data = JSON.parse(saved);
+    score = data.score || 0;
+    document.getElementById('score').textContent = score;
+    updateStreak();
     updateBadges();
-  } else {
-    alert("Ні! Спробуй ще.");
+  }
+  loadGlobalLeaderboard();
+}
+
+// === СТРІК ===
+function getStreak() {
+  const last = localStorage.getItem('cyberdrill_last') || new Date().toDateString();
+  const today = new Date().toDateString();
+  if (last === today) return streak;
+  localStorage.setItem('cyberdrill_last', today);
+  return last === new Date(Date.now() - 86400000).toDateString() ? streak + 1 : 1;
+}
+
+function updateStreak() {
+  streak = getStreak();
+  document.getElementById('streak-count').textContent = streak;
+}
+
+// === БЕЙДЖІ ===
+function unlockBadge(id) {
+  const badges = getBadges();
+  if (!badges.includes(id)) {
+    badges.push(id);
+    localStorage.setItem('cyberdrill_badges', JSON.stringify(badges));
+    alert(`Бейдж: ${id === 'zeroize' ? 'Zeroize Master' : 'OPSEC Pro'}!`);
+    updateBadges();
   }
 }
 
-document.getElementById('back-to-menu').onclick = () => showScreen('menu-screen');
+function getBadges() {
+  return JSON.parse(localStorage.getItem('cyberdrill_badges') || '[]');
+}
+
+function updateBadges() {
+  const badges = getBadges();
+  const names = { zeroize: "Zeroize Master", opsec: "OPSEC Pro" };
+  const div = document.getElementById('badges');
+  div.innerHTML = '<strong>Бейджи:</strong> ' + (badges.map(b => names[b]).join(' | ') || 'Немає');
+}
 
 // === ЛІДЕРБОРД ===
-function saveScore() {
-  if (!user) return;
-  const key = `cyberdrill_score_${user.login}`;
-  localStorage.setItem(key, score);
-  updateLeaderboard();
-}
-
-function loadScore() {
-  if (!user) return;
-  const key = `cyberdrill_score_${user.login}`;
-  score = parseInt(localStorage.getItem(key) || '0');
-  document.getElementById('score').textContent = score;
-}
-
-function updateLeaderboard() {
+async function loadGlobalLeaderboard() {
+  const res = await fetch('https://api.github.com/gists');
+  const gists = await res.json();
   const data = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith('cyberdrill_score_')) {
-      const login = key.split('_')[2];
-      data.push({ user: login, score: parseInt(localStorage.getItem(key)) });
+  for (const g of gists) {
+    if (g.description === 'CyberDrill Progress' && g.files['progress.json']) {
+      const content = await fetch(g.files['progress.json'].raw_url).then(r => r.text());
+      const json = JSON.parse(content);
+      data.push({ user: json.user, score: json.score || 0 });
     }
   }
-  data.sort((a, b) => b.score - a.score);
-  localStorage.setItem('cyberdrill_leaderboard', JSON.stringify(data.slice(0, 10)));
-}
-
-function loadLeaderboard() {
-  updateLeaderboard();
-  const data = JSON.parse(localStorage.getItem('cyberdrill_leaderboard') || '[]');
+  data.sort((a,b) => b.score - a.score);
   const ol = document.getElementById('leaders');
   ol.innerHTML = '';
-  data.forEach(d => {
+  data.slice(0,10).forEach(d => {
     const li = document.createElement('li');
     li.textContent = `@${d.user} — ${d.score}`;
     ol.appendChild(li);
   });
 }
 
-document.getElementById('leaderboard-btn').onclick = () => {
-  loadLeaderboard();
-  showScreen('leaderboard-screen');
-};
+document.getElementById('leaderboard-btn').onclick = () => { loadGlobalLeaderboard(); showScreen('leaderboard-screen'); };
 document.getElementById('back-from-leaderboard').onclick = () => showScreen('menu-screen');
 
-// === БЕЙДЖІ ===
-function updateBadges() {
-  const badges = JSON.parse(localStorage.getItem('cyberdrill_badges') || '[]');
-  const badgeDiv = document.getElementById('badges');
-  const names = { zeroize: "Zeroize Master", opsec: "OPSEC Pro" };
-  badgeDiv.innerHTML = '<strong>Бейджи:</strong> ' + 
-    (badges.map(b => names[b]).filter(Boolean).join(' | ') || 'Немає');
+// === ЗВУКИ (WAV) ===
+function playSound(id) {
+  const audio = document.getElementById(id);
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
 }
+
+// === ЩОДЕННИЙ ЧЕЛЕНДЖ ===
+document.getElementById('daily-btn').onclick = () => {
+  alert("Щоденний челендж: знайди фішинг за 15с! +200");
+  currentMission = 1;
+  startMission(1);
+};
