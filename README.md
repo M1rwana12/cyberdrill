@@ -1,28 +1,3 @@
-```markdown
-<p align="center">
-  <strong style="font-size: 2.8rem; color: #0f0; text-shadow: 0 0 15px #0f0; font-family: 'Orbitron', monospace;">
-    CyberDrill 2.0
-  </strong>
-</p>
-
-<p align="center">
-  <em style="color: #0b0;">Кібертренування для ЗСУ • OPSEC • Zeroize • Ransomware</em>
-</p>
-
-<p align="center">
-  <a href="https://m1rwana12.github.io/cyberdrill">
-    <img src="https://img.shields.io/badge/PLAY%20NOW-0f0?style=for-the-badge&logo=googlechrome" alt="Play"/>
-  </a>
-  <a href="https://m1rwana12.github.io/cyberdrill">
-    <img src="https://img.shields.io/badge/PWA-Install-0f0?style=for-the-badge&logo=pwa" alt="PWA"/>
-  </a>
-  <a href="https://github.com/M1rwana12/cyberdrill/stargazers">
-    <img src="https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0" alt="Stars"/>
-  </a>
-</p>
-
----
-
 ## Що це?
 
 **CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений спеціально для **тренування бійців ЗСУ**.
