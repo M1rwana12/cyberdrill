@@ -1,40 +1,59 @@
 ```markdown
-# CyberDrill 2.0  
-**Кібертренування для ЗСУ та всіх, хто захищає Україну**
+<p align="center">
+  <img src="https://i.imgur.com/3qR8kL2.png" alt="CyberDrill Logo" width="150"/>
+</p>
 
-[![Play Now](https://img.shields.io/badge/Play%20Now-CyberDrill-0f0?style=for-the-badge&logo=googlechrome)](https://m1rwana12.github.io/cyberdrill)  
-[![PWA](https://img.shields.io/badge/PWA-Install%20App-0f0?style=for-the-badge&logo=pwa)](https://m1rwana12.github.io/cyberdrill)  
-[![GitHub Stars](https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0)](https://github.com/M1rwana12/cyberdrill/stargazers)  
-[![License: MIT](https://img.shields.io/badge/License-MIT-0f0.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+<h1 align="center">
+  <span style="color: #0f0; text-shadow: 0 0 10px #0f0;">CyberDrill 2.0</span>
+</h1>
+
+<p align="center">
+  <strong>Кібертренування для ЗСУ</strong> — OPSEC, фішинг, Zeroize, ransomware
+</p>
+
+<p align="center">
+  <a href="https://m1rwana12.github.io/cyberdrill">
+    <img src="https://img.shields.io/badge/PLAY%20NOW-0f0?style=for-the-badge&logo=googlechrome" alt="Play Now"/>
+  </a>
+  <a href="https://m1rwana12.github.io/cyberdrill">
+    <img src="https://img.shields.io/badge/PWA-Install%20App-0f0?style=for-the-badge&logo=pwa" alt="PWA"/>
+  </a>
+  <a href="https://github.com/M1rwana12/cyberdrill/stargazers">
+    <img src="https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0" alt="Stars"/>
+  </a>
+  <a href="https://github.com/M1rwana12/cyberdrill/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-0f0.svg?style=for-the-badge" alt="MIT License"/>
+  </a>
+</p>
 
 ---
 
 ## Опис
 
-**CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений для тренування навичок **OPSEC, фішингу, Zeroize, захисту паролів та протидії ransomware**.
+> **CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений для **тренування бійців ЗСУ** та всіх, хто захищає Україну від кібератак.
 
-Це **тренувальний полігон** для:
-- Військових ЗСУ
-- IT-спеціалістів
-- Усіх, хто хоче навчитися захищатися від кібератак
+Це **не гра** — це **тренувальний полігон** для:
+- Військових
+- IT-фахівців
+- Усіх, хто хоче бути **кібернепереможним**
 
 ---
 
 ## Фічі
 
 | Функція | Опис |
-|-------|------|
+|--------|------|
 | **6 інтерактивних місій** | Від фішингу до ransomware |
-| **Drag & Drop на Canvas** | Клік по зображенню → знайди вразливість |
+| **Клік по зображенню** | Знайди вразливість на Canvas |
 | **Ransomware Бос** | 10 кліків за 20 секунд |
-| **Щоденний челендж** | +200 бонусів, 1 раз на день |
-| **Глобальний лідерборд** | Топ-10 гравців світу |
-| **Бейджи** | `Zeroize Master`, `OPSEC Pro` |
+| **Щоденний челендж** | +200 бонусів щодня |
+| **Глобальний лідерборд** | Топ-10 кібервоїнів |
+| **Бейджи** | `Zeroize Master` `OPSEC Pro` |
 | **GitHub OAuth** | Вхід через GitHub |
-| **PWA (Progressive Web App)** | Додаток на телефоні |
+| **PWA** | Додаток на телефоні |
 | **Збереження у Gist** | Прогрес назавжди |
-| **Звуки (WAV)** | beep, explosion, success |
-| **Кіберпанк стиль** | Неон, анімації, градієнти |
+| **Звуки .wav** | beep, explosion, success |
+| **Кіберпанк стиль** | Неон, градієнти, анімації |
 
 ---
 
@@ -53,11 +72,15 @@
 
 ## Скріншоти
 
-| Головне меню | Місія 5: AI Голос | Бос-файт |
-|--------------|-------------------|----------|
-| ![menu](https://i.imgur.com/placeholder-menu.png) | ![mission5](https://i.imgur.com/placeholder-ai.png) | ![boss](https://i.imgur.com/placeholder-ransom.png) |
+<div align="center">
+
+| **Головне меню** | **Місія 5: AI Голос** | **Бос-файт** |
+|------------------|------------------------|--------------|
+| ![menu](https://i.imgur.com/placeholder-menu.png) | ![ai](https://i.imgur.com/placeholder-ai.png) | ![boss](https://i.imgur.com/placeholder-ransom.png) |
 
 > *Скріншоти будуть додані після релізу*
+
+</div>
 
 ---
 
@@ -73,7 +96,7 @@
 
 ## PWA — Додаток на телефоні
 
-1. Відкрий гру в **Chrome / Safari**
+1. Відкрий у **Chrome / Safari**
 2. Натисни **"Додати на головний екран"**
 3. Запускай як додаток!
 
@@ -81,13 +104,9 @@
 
 ## Технології
 
-- **HTML5 Canvas** — інтерактив
-- **GitHub OAuth** — авторизація
-- **GitHub Gist API** — збереження прогресу
-- **PWA** — додаток на телефоні
-- **Cloudflare Workers** — OAuth проксі
-- **GitHub Pages** — хостинг
-- **WAV звуки** — beep, explosion, success
+```text
+HTML5 Canvas | GitHub OAuth | Gist API | PWA | Cloudflare Workers | GitHub Pages | WAV
+```
 
 ---
 
@@ -110,14 +129,22 @@ cd cyberdrill
 
 ## Розробник
 
-**[@M1rwana12](https://github.com/M1rwana12)**  
-> Кібер-розробник. Захищаю Україну кодом.
+<p align="center">
+  <a href="https://github.com/M1rwana12">
+    <img src="https://github.com/M1rwana12.png" width="80" style="border-radius: 50%; border: 3px solid #0f0;"/>
+  </a>
+</p>
+
+<p align="center">
+  <strong><a href="https://github.com/M1rwana12">@M1rwana12</a></strong><br>
+  Кібер-розробник. Захищаю Україну кодом.
+</p>
 
 ---
 
 ## Підтримати проєкт
 
-- **Поділися з друзями**
+- **Поділися з бійцями ЗСУ**
 - **Залиш зірку на GitHub**
 - **Зроби форк і додай свою місію**
 
@@ -129,10 +156,33 @@ cd cyberdrill
 
 ---
 
-> **CyberDrill — це не гра. Це зброя.**  
-> **Тренуйся. Захищай. Перемагай.**
+<p align="center">
+  <strong>
+    <span style="color: #0f0; text-shadow: 0 0 10px #0f0;">CyberDrill — це не гра. Це зброя.</span>
+  </strong>
+</p>
+
+<p align="center">
+  <em>Тренуйся. Захищай. Перемагай.</em>
+</p>
+
+<p align="center">
+  <strong>#кібербезпека #ЗСУ #OPSEC #Zeroize #CyberDrill</strong>
+</p>
+```
 
 ---
 
-**#кібербезпека #ЗСУ #OPSEC #Zeroize #CyberDrill**
+## КОМАНДИ ДЛЯ ЗАЛИВКИ (в терміналі)
+
+```bash
+# 1. Заміни README.md
+cat > README.md << 'EOF'
+# (весь код вище — встав сюди)
+EOF
+
+# 2. Додай і запуш
+git add README.md
+git commit -m "docs: ultra-beautiful README with neon, icons, badges, PWA"
+git push
 ```
