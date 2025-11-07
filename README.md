@@ -8,11 +8,11 @@
 3. Рація без Zeroize
 4. Пароль на стікері
 
-## Функції
-- GitHub-авторизація
-- Лідерборд
-- Бейджи: `Zeroize Master`, `OPSEC Pro`
+## Технології
+- HTML + Canvas
+- GitHub OAuth
+- Cloudflare Workers (OAuth Proxy)
+- GitHub Pages
 
-## Запуск
-```bash
-npx serve
+## Автор
+[@M1rwana12](https://github.com/M1rwana12) — спеціаліст з кібербезпеки
