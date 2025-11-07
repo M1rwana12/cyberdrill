@@ -15,10 +15,10 @@
 </head>
 <body>
   <div class="container">
-    <header>
+    <header class="header">
       <div class="logo">CyberDrill 2.0</div>
-      <div class="user-info">
-        <p id="github-user"></p>
+      <div class="user-panel">
+        <div id="github-user" class="username"></div>
         <div class="stats">
           <div class="score">Рахунок: <span id="score">0</span></div>
           <div class="streak">Streak: <span id="streak-count">0</span> днів</div>
@@ -29,26 +29,27 @@
 
     <!-- Екран входу -->
     <div id="login-screen" class="screen active">
-      <div class="card">
-        <h2>Увійдіть через GitHub</h2>
-        <button id="github-login" class="btn-primary">Увійти</button>
+      <div class="card login-card">
+        <h2>Вхід у систему</h2>
+        <p>Увійдіть через GitHub</p>
+        <button id="github-login" class="btn-login">Увійти</button>
       </div>
     </div>
 
     <!-- Головне меню -->
     <div id="menu-screen" class="screen">
-      <div class="card">
+      <div class="card menu-card">
         <h2>Виберіть місію</h2>
-        <div class="missions">
-          <button data-mission="1" class="mission-btn">1. Фішинг-лист</button>
-          <button data-mission="2" class="mission-btn">2. Селфі з прильотом</button>
-          <button data-mission="3" class="mission-btn">3. Zeroize рації</button>
-          <button data-mission="4" class="mission-btn">4. Пароль на стікері</button>
-          <button data-mission="5" class="mission-btn">5. AI Голос-фішинг</button>
+        <div class="missions-grid">
+          <button data-mission="1" class="mission-btn level-1">1. Фішинг-лист</button>
+          <button data-mission="2" class="mission-btn level-2">2. Селфі з прильотом</button>
+          <button data-mission="3" class="mission-btn level-3">3. Zeroize рації</button>
+          <button data-mission="4" class="mission-btn level-4">4. Пароль на стікері</button>
+          <button data-mission="5" class="mission-btn level-5">5. AI Голос-фішинг</button>
           <button data-mission="6" class="mission-btn boss">6. Ransomware Бос</button>
         </div>
-        <div class="menu-actions">
-          <button id="leaderboard-btn" class="btn-secondary">Лідери</button>
+        <div class="menu-footer">
+          <button id="leaderboard-btn" class="btn-leader">Лідери</button>
           <button id="daily-btn" class="btn-daily">Щоденний челендж</button>
         </div>
       </div>
@@ -56,9 +57,11 @@
 
     <!-- Екран гри -->
     <div id="game-screen" class="screen">
-      <div class="card">
-        <div id="mission-title" class="mission-title"></div>
-        <div id="timer" class="timer"></div>
+      <div class="card game-card">
+        <div class="mission-header">
+          <h2 id="mission-title"></h2>
+          <div id="timer" class="timer"></div>
+        </div>
         <canvas id="game-canvas"></canvas>
         <div id="hint" class="hint"></div>
         <div id="answers" class="answers"></div>
@@ -68,7 +71,7 @@
 
     <!-- Лідерборд -->
     <div id="leaderboard-screen" class="screen">
-      <div class="card">
+      <div class="card leaderboard-card">
         <h2>Глобальний Топ-10</h2>
         <ol id="leaders" class="leaderboard"></ol>
         <button id="back-from-leaderboard" class="btn-back">Назад</button>
