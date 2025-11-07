@@ -1,10 +1,11 @@
-```markdown
+```
 # CyberDrill 2.0  
 **Кібертренування для ЗСУ та всіх, хто захищає Україну**
 
-[![GitHub](https://img.shields.io/badge/GitHub-M1rwana12/cyberdrill-0f0?style=for-the-badge&logo=github)](https://github.com/M1rwana12/cyberdrill)  
-[![Play Online](https://img.shields.io/badge/Play%20Online-CyberDrill-0f0?style=for-the-badge&logo=googlechrome)](https://m1rwana12.github.io/cyberdrill)  
-[![PWA](https://img.shields.io/badge/PWA-Install%20App-0f0?style=for-the-badge&logo=pwa)](https://m1rwana12.github.io/cyberdrill)
+[![Play Now](https://img.shields.io/badge/Play%20Now-CyberDrill-0f0?style=for-the-badge&logo=googlechrome)](https://m1rwana12.github.io/cyberdrill)  
+[![PWA](https://img.shields.io/badge/PWA-Install%20App-0f0?style=for-the-badge&logo=pwa)](https://m1rwana12.github.io/cyberdrill)  
+[![GitHub Stars](https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0)](https://github.com/M1rwana12/cyberdrill/stargazers)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-0f0.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
@@ -12,7 +13,7 @@
 
 **CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений для тренування навичок **OPSEC, фішингу, Zeroize, захисту паролів та протидії ransomware**.
 
-Це **не просто гра** — це **тренувальний полігон** для:
+Це **тренувальний полігон** для:
 - Військових ЗСУ
 - IT-спеціалістів
 - Усіх, хто хоче навчитися захищатися від кібератак
@@ -50,6 +51,16 @@
 
 ---
 
+## Скріншоти
+
+| Головне меню | Місія 5: AI Голос | Бос-файт |
+|--------------|-------------------|----------|
+| ![menu](https://i.imgur.com/placeholder-menu.png) | ![mission5](https://i.imgur.com/placeholder-ai.png) | ![boss](https://i.imgur.com/placeholder-ransom.png) |
+
+> *Скріншоти будуть додані після релізу*
+
+---
+
 ## Як грати
 
 1. **Відкрий:** [m1rwana12.github.io/cyberdrill](https://m1rwana12.github.io/cyberdrill)
@@ -57,6 +68,14 @@
 3. **Обери місію**
 4. **Клікни по зображенню або вибери відповідь**
 5. **Збирай бонуси, бейджи, підіймайся в лідерборд!**
+
+---
+
+## PWA — Додаток на телефоні
+
+1. Відкрий гру в **Chrome / Safari**
+2. Натисни **"Додати на головний екран"**
+3. Запускай як додаток!
 
 ---
 
@@ -81,15 +100,11 @@ cd cyberdrill
 
 Відкрий `index.html` у браузері.
 
-> **Або грай онлайн:** [m1rwana12.github.io/cyberdrill](https://m1rwana12.github.io/cyberdrill)
-
 ---
 
-## PWA — Додаток на телефоні
+## Про проєкт
 
-1. Відкрий гру в **Chrome / Safari**
-2. Натисни **"Додати на головний екран"**
-3. Запускай як додаток!
+[Детальніше про розробку →](about.html)
 
 ---
 
