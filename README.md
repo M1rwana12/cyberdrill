@@ -1,6 +1,6 @@
 ```markdown
 <p align="center">
-  <img src="https://i.imgur.com/3qR8kL2.png" alt="CyberDrill Logo" width="150"/>
+  <img src="assets/icon-512.png" alt="CyberDrill Logo" width="120"/>
 </p>
 
 <h1 align="center">
@@ -8,7 +8,8 @@
 </h1>
 
 <p align="center">
-  <strong>Кібертренування для ЗСУ</strong> — OPSEC, фішинг, Zeroize, ransomware
+  <strong>Кібертренування для ЗСУ</strong><br>
+  OPSEC • Фішинг • Zeroize • Ransomware
 </p>
 
 <p align="center">
@@ -21,45 +22,35 @@
   <a href="https://github.com/M1rwana12/cyberdrill/stargazers">
     <img src="https://img.shields.io/github/stars/M1rwana12/cyberdrill?style=for-the-badge&logo=github&color=0f0" alt="Stars"/>
   </a>
-  <a href="https://github.com/M1rwana12/cyberdrill/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-0f0.svg?style=for-the-badge" alt="MIT License"/>
-  </a>
 </p>
 
 ---
 
 ## Опис
 
-> **CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки**, створений для **тренування бійців ЗСУ** та всіх, хто захищає Україну від кібератак.
+**CyberDrill 2.0** — це **інтерактивний симулятор кібербезпеки** для **тренування бійців ЗСУ**.
 
-Це **не гра** — це **тренувальний полігон** для:
-- Військових
-- IT-фахівців
-- Усіх, хто хоче бути **кібернепереможним**
+> **Не гра. Зброя.**
 
 ---
 
 ## Фічі
 
-| Функція | Опис |
-|--------|------|
-| **6 інтерактивних місій** | Від фішингу до ransomware |
-| **Клік по зображенню** | Знайди вразливість на Canvas |
-| **Ransomware Бос** | 10 кліків за 20 секунд |
-| **Щоденний челендж** | +200 бонусів щодня |
-| **Глобальний лідерборд** | Топ-10 кібервоїнів |
-| **Бейджи** | `Zeroize Master` `OPSEC Pro` |
-| **GitHub OAuth** | Вхід через GitHub |
-| **PWA** | Додаток на телефоні |
-| **Збереження у Gist** | Прогрес назавжди |
-| **Звуки .wav** | beep, explosion, success |
-| **Кіберпанк стиль** | Неон, градієнти, анімації |
+- **6 місій** — від фішингу до боса  
+- **Клік по зображенню** — знайди вразливість  
+- **Ransomware Бос** — 10 кліків за 20с  
+- **Щоденний челендж** — +200 балів  
+- **Лідерборд** — глобальний топ  
+- **Бейджи** — `Zeroize Master`, `OPSEC Pro`  
+- **PWA** — додаток на телефоні  
+- **GitHub Gist** — збереження прогресу  
+- **Звуки .wav** — beep, explosion, success  
 
 ---
 
 ## Місії
 
-| # | Назва | Навичка |
+| # | Місія | Навичка |
 |---|------|--------|
 | 1 | Фішинг-лист | Розпізнавання фішингу |
 | 2 | Селфі з прильотом | OPSEC, EXIF |
@@ -72,58 +63,58 @@
 
 ## Скріншоти
 
-<div align="center">
+<p align="center">
+  <img src="screenshots/menu.jpg" width="45%" alt="Головне меню"/>
+  <img src="screenshots/mission5.jpg" width="45%" alt="Місія 5"/>
+</p>
+<p align="center">
+  <img src="screenshots/boss.jpg" width="45%" alt="Бос-файт"/>
+</p>
 
-| **Головне меню** | **Місія 5: AI Голос** | **Бос-файт** |
-|------------------|------------------------|--------------|
-| ![menu](https://i.imgur.com/placeholder-menu.png) | ![ai](https://i.imgur.com/placeholder-ai.png) | ![boss](https://i.imgur.com/placeholder-ransom.png) |
-
-> *Скріншоти будуть додані після релізу*
-
-</div>
+> *Зроби скріншоти та поклади в папку `screenshots/`*
 
 ---
 
 ## Як грати
 
-1. **Відкрий:** [m1rwana12.github.io/cyberdrill](https://m1rwana12.github.io/cyberdrill)
-2. **Увійди через GitHub**
-3. **Обери місію**
-4. **Клікни по зображенню або вибери відповідь**
-5. **Збирай бонуси, бейджи, підіймайся в лідерборд!**
+1. [Відкрий гру](https://m1rwana12.github.io/cyberdrill)  
+2. Увійди через **GitHub**  
+3. Обери місію  
+4. Клікни по вразливості  
+5. Збирай бали → підіймайся в лідерборд!
 
 ---
 
 ## PWA — Додаток на телефоні
 
-1. Відкрий у **Chrome / Safari**
-2. Натисни **"Додати на головний екран"**
-3. Запускай як додаток!
+1. Відкрий у Chrome/Safari  
+2. Натисни **"Додати на головний екран"**  
+3. Грай без інтернету!
 
 ---
 
 ## Технології
 
 ```text
-HTML5 Canvas | GitHub OAuth | Gist API | PWA | Cloudflare Workers | GitHub Pages | WAV
+HTML5 • Canvas • GitHub OAuth • Gist API • PWA • GitHub Pages
 ```
 
 ---
 
-## Встановлення (локально)
+## Локальний запуск
 
 ```bash
 git clone https://github.com/M1rwana12/cyberdrill.git
 cd cyberdrill
 ```
 
-Відкрий `index.html` у браузері.
+Відкрий `index.html`
 
 ---
 
 ## Про проєкт
 
-[Детальніше про розробку →](about.html)
+[Детальніше →](about.html)
 
 ---
 
@@ -136,29 +127,29 @@ cd cyberdrill
 </p>
 
 <p align="center">
-  <strong><a href="https://github.com/M1rwana12">@M1rwana12</a></strong><br>
+  <strong>@M1rwana12</strong><br>
   Кібер-розробник. Захищаю Україну кодом.
 </p>
 
 ---
 
-## Підтримати проєкт
+## Підтримати
 
-- **Поділися з бійцями ЗСУ**
-- **Залиш зірку на GitHub**
-- **Зроби форк і додай свою місію**
+- Поділися з бійцями  
+- Залиш зірку  
+- Додай свою місію
 
 ---
 
 ## Ліцензія
 
-**MIT License** — використовуй, змінюй, поширюй.
+**MIT** — використовуй, змінюй, поширюй.
 
 ---
 
 <p align="center">
-  <strong>
-    <span style="color: #0f0; text-shadow: 0 0 10px #0f0;">CyberDrill — це не гра. Це зброя.</span>
+  <strong style="color: #0f0; text-shadow: 0 0 10px #0f0;">
+    CyberDrill — це не гра. Це зброя.
   </strong>
 </p>
 
@@ -167,22 +158,6 @@ cd cyberdrill
 </p>
 
 <p align="center">
-  <strong>#кібербезпека #ЗСУ #OPSEC #Zeroize #CyberDrill</strong>
+  #кібербезпека #ЗСУ #OPSEC #CyberDrill
 </p>
-```
-
----
-
-## КОМАНДИ ДЛЯ ЗАЛИВКИ (в терміналі)
-
-```bash
-# 1. Заміни README.md
-cat > README.md << 'EOF'
-# (весь код вище — встав сюди)
-EOF
-
-# 2. Додай і запуш
-git add README.md
-git commit -m "docs: ultra-beautiful README with neon, icons, badges, PWA"
-git push
 ```
